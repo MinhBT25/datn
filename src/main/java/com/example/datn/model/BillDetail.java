@@ -35,7 +35,7 @@ public class BillDetail {
     private Object idProductCt;
     @ManyToOne
     @JoinColumn(name = "id_bill", referencedColumnName = "id")
-    private Bill billByIdBill;
+    private Bill bill;
 
 
 }
