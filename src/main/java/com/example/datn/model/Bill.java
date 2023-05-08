@@ -11,14 +11,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import java.sql.Timestamp;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class Bill {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -57,5 +61,13 @@ public class Bill {
     @Basic
     @Column(name = "id_staff")
     private Object idStaff;
+    @ManyToOne
+    @JoinColumn(name = "id_customer", referencedColumnName = "id")
+    private Customer customer;
+    @ManyToOne
+    @JoinColumn(name = "id_staff", referencedColumnName = "id")
+    private Staff staff;
+    @OneToMany(mappedBy = "bill")
+    private Collection<BillDetail> billDetails;
 
 }

@@ -1,15 +1,26 @@
 package com.example.datn.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.sql.Timestamp;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Color {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -24,49 +35,7 @@ public class Color {
     @Basic
     @Column(name = "update_at")
     private Timestamp updateAt;
+    @OneToMany(mappedBy = "color")
+    private Collection<ProductDetail> productDetails;
 
-    public Object getId() {
-        return id;
-    }
-
-    public void setId(Object id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Timestamp getCreateAt() {
-        return createAt;
-    }
-
-    public void setCreateAt(Timestamp createAt) {
-        this.createAt = createAt;
-    }
-
-    public Timestamp getUpdateAt() {
-        return updateAt;
-    }
-
-    public void setUpdateAt(Timestamp updateAt) {
-        this.updateAt = updateAt;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Color color = (Color) o;
-        return Objects.equals(id, color.id) && Objects.equals(name, color.name) && Objects.equals(createAt, color.createAt) && Objects.equals(updateAt, color.updateAt);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, createAt, updateAt);
-    }
 }

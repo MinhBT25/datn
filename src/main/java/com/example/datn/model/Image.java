@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.sql.Timestamp;
 import java.util.Objects;
 
@@ -27,6 +29,9 @@ public class Image {
     @Basic
     @Column(name = "id_product")
     private Object idProduct;
+    @ManyToOne
+    @JoinColumn(name = "id_product", referencedColumnName = "id")
+    private Product productByIdProduct;
 
     public String getCode() {
         return code;
@@ -79,5 +84,13 @@ public class Image {
     @Override
     public int hashCode() {
         return Objects.hash(code, name, createAt, updateAt, idProduct);
+    }
+
+    public Product getProductByIdProduct() {
+        return productByIdProduct;
+    }
+
+    public void setProductByIdProduct(Product productByIdProduct) {
+        this.productByIdProduct = productByIdProduct;
     }
 }

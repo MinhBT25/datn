@@ -1,5 +1,10 @@
 package com.example.datn.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +17,10 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -29,67 +38,7 @@ public class Category {
     @Basic
     @Column(name = "status")
     private String status;
-    @OneToMany(mappedBy = "categoryByIdCategory")
-    private Collection<CategoryDetail> categoryDetailsById;
+    @OneToMany(mappedBy = "category")
+    private Collection<CategoryDetail> categoryDetails;
 
-    public Object getId() {
-        return id;
-    }
-
-    public void setId(Object id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Timestamp getCreateAt() {
-        return createAt;
-    }
-
-    public void setCreateAt(Timestamp createAt) {
-        this.createAt = createAt;
-    }
-
-    public Timestamp getUpdateAt() {
-        return updateAt;
-    }
-
-    public void setUpdateAt(Timestamp updateAt) {
-        this.updateAt = updateAt;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Category category = (Category) o;
-        return Objects.equals(id, category.id) && Objects.equals(name, category.name) && Objects.equals(createAt, category.createAt) && Objects.equals(updateAt, category.updateAt) && Objects.equals(status, category.status);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, createAt, updateAt, status);
-    }
-
-    public Collection<CategoryDetail> getCategoryDetailsById() {
-        return categoryDetailsById;
-    }
-
-    public void setCategoryDetailsById(Collection<CategoryDetail> categoryDetailsById) {
-        this.categoryDetailsById = categoryDetailsById;
-    }
 }

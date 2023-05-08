@@ -1,5 +1,10 @@
 package com.example.datn.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,11 +20,15 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Staff {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
-    private Object id;
+    private Long id;
     @Basic
     @Column(name = "staff_name")
     private String staffName;
@@ -50,126 +59,10 @@ public class Staff {
     @Basic
     @Column(name = "id_position")
     private Object idPosition;
-    @OneToMany(mappedBy = "staffByIdStaff")
-    private Collection<Bill> billsById;
+    @OneToMany(mappedBy = "staff")
+    private Collection<Bill> bills;
     @ManyToOne
     @JoinColumn(name = "id_position", referencedColumnName = "id", nullable = false)
-    private Position positionByIdPosition;
+    private Position position;
 
-    public Object getId() {
-        return id;
-    }
-
-    public void setId(Object id) {
-        this.id = id;
-    }
-
-    public String getStaffName() {
-        return staffName;
-    }
-
-    public void setStaffName(String staffName) {
-        this.staffName = staffName;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Date getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Timestamp getCreateAt() {
-        return createAt;
-    }
-
-    public void setCreateAt(Timestamp createAt) {
-        this.createAt = createAt;
-    }
-
-    public Timestamp getUpdateAt() {
-        return updateAt;
-    }
-
-    public void setUpdateAt(Timestamp updateAt) {
-        this.updateAt = updateAt;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public Object getIdPosition() {
-        return idPosition;
-    }
-
-    public void setIdPosition(Object idPosition) {
-        this.idPosition = idPosition;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Staff staff = (Staff) o;
-        return Objects.equals(id, staff.id) && Objects.equals(staffName, staff.staffName) && Objects.equals(phone, staff.phone) && Objects.equals(email, staff.email) && Objects.equals(birthday, staff.birthday) && Objects.equals(username, staff.username) && Objects.equals(password, staff.password) && Objects.equals(createAt, staff.createAt) && Objects.equals(updateAt, staff.updateAt) && Objects.equals(status, staff.status) && Objects.equals(idPosition, staff.idPosition);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, staffName, phone, email, birthday, username, password, createAt, updateAt, status, idPosition);
-    }
-
-    public Collection<Bill> getBillsById() {
-        return billsById;
-    }
-
-    public void setBillsById(Collection<Bill> billsById) {
-        this.billsById = billsById;
-    }
-
-    public Position getPositionByIdPosition() {
-        return positionByIdPosition;
-    }
-
-    public void setPositionByIdPosition(Position positionByIdPosition) {
-        this.positionByIdPosition = positionByIdPosition;
-    }
 }

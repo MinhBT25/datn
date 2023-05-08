@@ -1,15 +1,26 @@
 package com.example.datn.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -33,73 +44,11 @@ public class Comment {
     @Basic
     @Column(name = "id_product")
     private Object idProduct;
+    @ManyToOne
+    @JoinColumn(name = "id_customer", referencedColumnName = "id")
+    private Customer customer;
+    @ManyToOne
+    @JoinColumn(name = "id_product", referencedColumnName = "id")
+    private Product product;
 
-    public Object getId() {
-        return id;
-    }
-
-    public void setId(Object id) {
-        this.id = id;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public Timestamp getCreateAt() {
-        return createAt;
-    }
-
-    public void setCreateAt(Timestamp createAt) {
-        this.createAt = createAt;
-    }
-
-    public Timestamp getUpdateAt() {
-        return updateAt;
-    }
-
-    public void setUpdateAt(Timestamp updateAt) {
-        this.updateAt = updateAt;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public Object getIdCustomer() {
-        return idCustomer;
-    }
-
-    public void setIdCustomer(Object idCustomer) {
-        this.idCustomer = idCustomer;
-    }
-
-    public Object getIdProduct() {
-        return idProduct;
-    }
-
-    public void setIdProduct(Object idProduct) {
-        this.idProduct = idProduct;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Comment comment = (Comment) o;
-        return Objects.equals(id, comment.id) && Objects.equals(content, comment.content) && Objects.equals(createAt, comment.createAt) && Objects.equals(updateAt, comment.updateAt) && Objects.equals(status, comment.status) && Objects.equals(idCustomer, comment.idCustomer) && Objects.equals(idProduct, comment.idProduct);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, content, createAt, updateAt, status, idCustomer, idProduct);
-    }
 }

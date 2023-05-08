@@ -1,5 +1,10 @@
 package com.example.datn.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +18,10 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "bill_detail", schema = "datn_en", catalog = "")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class BillDetail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -31,11 +40,13 @@ public class BillDetail {
     @Column(name = "id_bill")
     private Object idBill;
     @Basic
-    @Column(name = "id_product_ct")
-    private Object idProductCt;
+    @Column(name = "id_product_detail")
+    private Object idProductDetail;
     @ManyToOne
     @JoinColumn(name = "id_bill", referencedColumnName = "id")
     private Bill bill;
-
+    @ManyToOne
+    @JoinColumn(name = "id_product_detail", referencedColumnName = "id")
+    private ProductDetail productDetail;
 
 }
